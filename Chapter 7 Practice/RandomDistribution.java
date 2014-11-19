@@ -1,40 +1,33 @@
+import java.util.Scanner;
 
-
-/**
- * Write a description of class RandomDistribution here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class RandomDistribution
-{
-    /** description of instance variable x (add comment for each instance variable) */
-    private int x;
+ {
+     public static void main(String[] args) 
+     {
+         Scanner in = new Scanner(System.in);
 
-    /**
-     * Default constructor for objects of class RandomDistribution
-     */
-    public RandomDistribution()
-    {
-        // initialise instance variables
-        x = 0;
-    }
+         System.out.print("How many random numbers? ");
+         int num = in.nextInt();
 
-    /**
-     * An example of a method - replace this comment with your own
-     *    that describes the operation of the method
-     *
-     * @pre        preconditions for the method
-     *            (what the method assumes about the method's parameters and class's state)
-     * @post    postconditions for the method
-     *            (what the method guarantees upon completion)
-     * @param    y    description of parameter y
-     * @return    description of the return value
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x+y;
-    }
+         System.out.print("What is the number of values for each random draw? ");
+         int val = in.nextInt();
 
+         int[] all = new int[num];
+         int[] draw = new int[val];
+
+         for (int i = 0; i < num; i++) 
+         {
+             all[i] = (int)(Math.random() * i);
+         }
+
+         for (int i = 0; i < val; i++) 
+         {
+             draw[i] = all[((int)(Math.random() * num))];
+         }
+
+         for (int i = 0; i < val; i++) 
+         {
+             System.out.println(i + "\t" + draw[i]);
+         }
+     }
 }
