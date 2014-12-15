@@ -3,12 +3,20 @@
 public class CharMatrix
 {
   // Fields:
-
+  char[][] array;
   // Constructor: creates a grid with dimensions rows, cols,
   // and fills it with spaces
   public CharMatrix(int rows, int cols)
   {
-    ...
+    array = new char[rows][cols];
+    
+    for( i=0; i<rows; i++)
+    {
+        for(j=0; j<cols; j++)
+        {
+            
+        }
+    }
   }
 
   // Constructor: creates a grid with dimensions rows , cols ,
