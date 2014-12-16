@@ -44,7 +44,7 @@ public class RadarViewer
             Thread.sleep(100); // sleep 100 milliseconds (1/10 second)
             
             radar.scan();
-            
+            radar.updateFreckleLocation(xchange, ychange);
             frame.repaint();
         }
     }

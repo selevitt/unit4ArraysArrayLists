@@ -11,6 +11,10 @@ public class SuperRadar
     // stores whether each cell triggered detection for the current scan of the radar
     private boolean[][] currentScan;
     
+    // creates a copy of the previous scan
+    private boolean[][] previousScan;
+    
+    
     // value of each cell is incremented for each scan in which that cell triggers detection 
     private int[][] accumulator;
     
@@ -24,8 +28,10 @@ public class SuperRadar
     // number of scans of the radar since construction
     private int numScans;
     
-    // creates a copy of the previous scan
-    private boolean[][] previousScan;
+    //velocity in the x and y direction
+    private int dX;
+    private int dY;
+
 
     /**
      * Constructor for objects of class SuRadar
@@ -33,16 +39,29 @@ public class SuperRadar
      * @param   rows    the number of rows in the radar grid
      * @param   cols    the number of columns in the radar grid
      */
-    public SuperRadar(int rows, int cols)
+    public SuperRadar(int rows, int cols, int velX, int velY, int monsterLocationY, int monsterLocationX)
     {
         // initialize instance variables
         currentScan = new boolean[rows][cols]; // elements will be set to false
-        accumulator = new int[rows][cols]; // elements will be set to 0
+        accumulator = new int[11][11]; // elements will be set to 0
         
-        // randomly set the location of the monster (can be explicity set through the
+        previousScan = new boolean[rows][cols];
+        for(int row = 0; row<previousScan.length; row++)
+        {
+            for(int col = 0; col<previousScan[0].length;col++)
+            {
+                previousScan[row][col] = false;
+            }
+        }
+        
         //  setMonsterLocation method
-        monsterLocationRow = (int)(Math.random() * rows);
-        monsterLocationCol = (int)(Math.random() * cols);
+        monsterLocationRow = monsterLocationY;
+        monsterLocationCol = monsterLocationX;
+        
+        //initialize dx and dy
+        
+        dX = velX;
+        dY = velY;
         
         noiseFraction = 0.05;
         numScans= 0;
@@ -55,6 +74,10 @@ public class SuperRadar
     public void scan()
     {
         
+        // set previous to be the current before clearing current
+        for(int row = 0; row < 
+        previousScan = currentScan;
+       
         // zero the current scan grid
         
         for(int row = 0; row < currentScan.length; row++)
@@ -87,22 +110,6 @@ public class SuperRadar
         numScans++;
     }
 
-    /**
-     * Sets the location of the monster
-     * 
-     * @param   row     the row in which the monster is located
-     * @param   col     the column in which the monster is located
-     * @pre row and col must be within the bounds of the radar grid
-     */
-    public void setMonsterLocation(int row, int col)
-    {
-        // remember the row and col of the monster's location
-        monsterLocationRow = row;
-        monsterLocationCol = col;
-        
-        // update the radar grid to show that something was detected at the specified location
-        currentScan[row][col] = true;
-    }
     
      /**
      * Sets the probability that a given cell will generate a false detection
